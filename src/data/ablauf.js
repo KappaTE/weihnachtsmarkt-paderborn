@@ -20,14 +20,15 @@ export const ablauf = [
     stationen: [
       {
         id: "sa-fruehstueck",
-        von: uhr(10),
-        zeit: "10.00",
+        von: uhr(8, 30),
+        zeit: "08.30",
         art: "fix",
         name: "Gemeinsames Frühstück",
-        ortOffen: "Der Ort steht noch nicht fest — kommt, sobald entschieden.",
+        ort: "Franzes, Arnsberg-Müschede",
+        ortId: "franzes",
         notiz:
-          "Unterwegs nach Paderborn, alle zusammen. Danach ist es nur noch eine kurze " +
-          "Strecke bis zum Hotel.",
+          "Unterwegs nach Paderborn, alle zusammen. Vom Franzes bis zum Hotel sind es " +
+          "rund 90 km, gut eine Stunde Fahrt — für 11:00 also gegen 9:45 aufbrechen.",
       },
       {
         id: "sa-ankunft",

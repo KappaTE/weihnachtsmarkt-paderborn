@@ -32,6 +32,7 @@ export default function Karte() {
   // nur einmal zeichnen — sonst liegen zwei Pins übereinander und nur einer ist tippbar.
   const gesehen = new Set();
   const sichtbar = orte
+    .filter(o => KATEGORIEN.includes(o.kategorie))
     .filter(o => (nurGemerkt ? merkliste.includes(o.id) : filter.includes(o.kategorie)))
     .filter(o => {
       const k = `${o.lat},${o.lng}`;

@@ -1,6 +1,6 @@
 // src/data/orte.js
 // Einzige Quelle für alles mit Koordinaten. Andere Datendateien referenzieren per ortId.
-// kategorie: "hotel" | "restaurant" | "markt" | "parken"
+// kategorie: "hotel" | "restaurant" | "markt" | "bar" | "parken" | "unterwegs" (nicht auf der Karte)
 // stand: "bestaetigt" = gebucht bzw. amtlich | "unbestaetigt" = Portalangabe / Vorjahr
 //
 // Alle lat/lng sind über OpenStreetMap/Nominatim aufgelöst, nicht geschätzt.
@@ -46,6 +46,23 @@ export const orte = [
     mapsLink: maps("Paderborner Brauhaus Kisau 2 Paderborn"),
     naviLink: navi("Paderborner Brauhaus Kisau 2 Paderborn"),
     stand: "bestaetigt",
+  },
+
+  // ── UNTERWEGS (nicht auf der Karte — liegt rund 90 km vor Paderborn) ────
+
+  {
+    id: "franzes",
+    name: "Franzes",
+    adresse: "Rönkhauser Straße 70, 59757 Arnsberg-Müschede",
+    kategorie: "unterwegs",
+    beschreibung: "Bäckerei mit Café — hier frühstücken alle gemeinsam, bevor es nach Paderborn geht.",
+    tipp: "Für 16 Personen am besten vorher Bescheid geben: +49 2932 9411728.",
+    oeffnung: "Sa 06:00–14:00",
+    lat: 51.40142,
+    lng: 7.99816,
+    mapsLink: maps("Franzes Rönkhauser Straße 70 Arnsberg"),
+    naviLink: navi("Franzes Rönkhauser Straße 70 Arnsberg"),
+    stand: "unbestaetigt",
   },
 
   // ── MARKTBEREICHE ────────────────────────────────────────────────────────

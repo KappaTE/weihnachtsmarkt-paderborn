@@ -3,7 +3,7 @@
 // Monat ist 0-basiert: 10 = November. Lokale Gerätezeit — alle sind vor Ort.
 
 export const termine = [
-  { id: 'fruehstueck', zeit: new Date(2026, 10, 28, 10,  0), name: 'Gemeinsames Frühstück', ort: 'Ort steht noch nicht fest' },
+  { id: 'fruehstueck', zeit: new Date(2026, 10, 28,  8, 30), name: 'Gemeinsames Frühstück', ort: 'Franzes, Arnsberg-Müschede' },
   { id: 'ankunft',  zeit: new Date(2026, 10, 28, 11,  0), name: 'Ankunft in Paderborn', ort: 'Hotel zur Mühle' },
   { id: 'checkin',  zeit: new Date(2026, 10, 28, 15,  0), name: 'Check-in',             ort: 'Hotel zur Mühle' },
   { id: 'essen',    zeit: new Date(2026, 10, 28, 17, 30), name: 'Tisch im Brauhaus',    ort: 'Paderborner Brauhaus, Kisau 2' },

@@ -10,6 +10,7 @@ export const KAT_FARBE = {
   markt:      '#E8A33D',  // Budenlicht — Marktbereiche
   bar:        '#6FA88A',  // Tanne — Bars für nach 22 Uhr
   parken:     '#8A7A6E',  // warmes Grau — Rückfallebene
+  unterwegs:  '#BCADA1',  // nur im Sheet, nicht auf der Karte
 };
 
 export const KAT_LABEL = {
@@ -18,4 +19,5 @@ export const KAT_LABEL = {
   markt:      'Markt',
   bar:        'Nach 22 Uhr',
   parken:     'Parken',
+  unterwegs:  'Unterwegs',
 };

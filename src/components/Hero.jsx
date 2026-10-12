@@ -37,7 +37,7 @@ export default function Hero() {
 
       {/* Die These: zwei Zahlen, dazwischen sichtbar Luft. */}
       <div className="relative border-y border-holz-800 py-6 flex flex-col">
-        <Marke zeit="10.00" was="Gemeinsames Frühstück" wo="unterwegs · Ort noch offen" />
+        <Marke zeit="08.30" was="Gemeinsames Frühstück" wo="Franzes · Arnsberg-Müschede" />
         <div className="h-4" aria-hidden="true" />
         <Marke zeit="11.00" was="Ankunft" wo="Hotel zur Mühle" />
         <div className="flex gap-[18px] py-[18px] pl-[3px]">
