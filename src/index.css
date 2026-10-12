@@ -85,12 +85,10 @@ body {
   filter: invert(1) hue-rotate(155deg) brightness(0.82) contrast(0.92) sepia(0.35) saturate(0.6);
 }
 
-.leaflet-popup-content-wrapper,
-.leaflet-popup-tip {
-  background: #1A1614;
-  color: #F2EBE3;
+.leaflet-container { font-family: inherit; }
+.leaflet-control-attribution {
+  background: rgba(18, 16, 14, 0.75) !important;
+  color: #8A7A6E !important;
+  font-size: 9px !important;
 }
-.leaflet-popup-content-wrapper { border-radius: 2px; }
-.leaflet-container a.leaflet-popup-close-button { color: #9A8B80; }
-/* Leaflet setzt Links im Popup auf sein eigenes Blau — hier zurück auf Budenlicht. */
-.leaflet-container .leaflet-popup-content a { color: #E8A33D; }
+.leaflet-control-attribution a { color: #9A8B80 !important; }

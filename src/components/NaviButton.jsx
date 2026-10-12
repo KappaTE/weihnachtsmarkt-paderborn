@@ -12,9 +12,9 @@ export default function NaviButton({ ort, label, voll = false }) {
         href={ort.naviLink}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 w-full border border-licht-500/60 hover:border-licht-400 hover:bg-licht-500/10 text-licht-300 font-medium px-4 py-3 rounded-kante transition-colors"
+        className="flex items-center justify-center gap-2 w-full min-h-12 border border-licht-500/60 hover:border-licht-400 hover:bg-licht-500/10 text-licht-300 text-sm font-medium px-4 rounded-kante transition-colors"
       >
-        <Navigation size={16} />
+        <Navigation size={15} />
         {text}
       </a>
     );

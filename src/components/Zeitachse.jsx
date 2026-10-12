@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
 import { MapPin } from 'lucide-react';
 import { getOrtById } from '../data/orte';
 import { minutenImTag, istReisetag } from '../data/termine';
+import useJetzt from '../state/useJetzt';
 import NaviButton from './NaviButton';
 
 // Höhe pro Stunde. Bestimmt, wie stark sich lange Lücken im Layout durchsetzen —
@@ -24,13 +24,7 @@ function dauerText(s) {
 }
 
 export default function Zeitachse({ tag }) {
-  const [jetzt, setJetzt] = useState(() => new Date());
-
-  useEffect(() => {
-    const id = setInterval(() => setJetzt(new Date()), 60_000);
-    return () => clearInterval(id);
-  }, []);
-
+  const jetzt = useJetzt();
   const amTag = istReisetag(jetzt);
   const jetztMin = minutenImTag(jetzt);
 
@@ -92,9 +86,6 @@ export default function Zeitachse({ tag }) {
                       : 'relative z-10 mt-2 w-1.5 h-1.5 rounded-full bg-holz-600 ring-4 ring-holz-950'
                 }
               />
-              {jetztHier && (
-                <span className="absolute left-1/2 -translate-x-1/2 top-8 w-2 h-2 rounded-full bg-licht-400 ring-4 ring-holz-950 animate-pulse" />
-              )}
             </div>
 
             {/* Inhalt */}
@@ -126,7 +117,8 @@ export default function Zeitachse({ tag }) {
               )}
 
               {jetztHier && (
-                <p className="zeit text-licht-400 text-[11px] mt-1 uppercase tracking-wider">
+                <p className="zeit flex items-center gap-1.5 text-licht-400 text-[11px] leading-none mt-1.5 uppercase tracking-[0.1em]">
+                  <span className="w-[7px] h-[7px] rounded-full bg-licht-400 shadow-[0_0_10px_#E8A33D] animate-pulse" />
                   ihr seid hier
                 </p>
               )}

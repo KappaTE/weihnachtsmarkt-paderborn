@@ -23,7 +23,12 @@ ist Datenpflege in `src/data/`, nicht Komponentenbau.
 
 ## Architektur
 
-- Vite + React (JSX, kein TypeScript), Tab-State in `App.jsx`, kein Router.
+- Vite + React (JSX, kein TypeScript), kein Router. Gemeinsamer Zustand (Tab, Merkliste,
+  Treffpunkt, offenes Sheet) in `src/state/AppZustand.jsx`, abrufbar über `useApp()`.
+- Jeder Ort öffnet dieselbe Detailansicht (`Sheet.jsx`, per `openOrt(id)`) — keine Leaflet-Popups,
+  keine zweite Detaildarstellung bauen. Das Sheet enthält auch den Treffpunkt-Dialog.
+- Merkliste (`wmpb-merkliste`) und Treffpunkt (`wmpb-treffpunkt`) liegen nur im localStorage des
+  jeweiligen Handys. Geteilt wird der Treffpunkt per WhatsApp-Link, nicht über die Seite.
 - Inhalte ausschließlich in `src/data/*.js` als exportierte Arrays, Komponenten rendern nur.
   „Neuer Inhalt" heißt Datensatz ergänzen, nicht Komponente anfassen.
 - Jeder Ort braucht `id`, `lat`, `lng`, `mapsLink` — ohne Koordinaten fehlt er auf der Karte.

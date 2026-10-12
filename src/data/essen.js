@@ -61,7 +61,7 @@ export const aufwaermen = [
     titel: "Das Hotel selbst",
     text:
       "Mit rund 350 m zum Rathausplatz euer bester Rückzugsort: kurz hoch, aufwärmen, " +
-      "Windeln wechseln, weiter. Bei sechseinhalb Stunden Aufenthalt der wichtigste Vorteil " +
+      "weiter. Bei sechseinhalb Stunden Aufenthalt der wichtigste Vorteil " +
       "der zentralen Lage.",
   },
   {

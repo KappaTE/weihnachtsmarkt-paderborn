@@ -32,6 +32,10 @@ export function restzeit(ziel, jetzt = new Date()) {
 export const uhrzeit = (d) =>
   d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
 
+// Minuten seit Mitternacht als "17.15" — gleiche Schreibweise wie auf der Zeitachse.
+export const fmtMinuten = (m) =>
+  `${String(Math.floor(m / 60) % 24).padStart(2, '0')}.${String(m % 60).padStart(2, '0')}`;
+
 // Minuten seit Mitternacht — Bezugsgröße für die Zeitachse.
 export const minutenImTag = (d) => d.getHours() * 60 + d.getMinutes();
 
