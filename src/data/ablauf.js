@@ -100,6 +100,7 @@ export const ablauf = [
         ort: "Domplatz",
         ortId: "domplatz",
         notiz: "Im Dunkeln ist der Markt am schönsten. Letzter Ausschank gegen 22:00.",
+        vermerke: ["Kunsthandwerk-Stände und Fahrgeschäfte dürfen schon um 20:00 schließen."],
       },
       {
         id: "sa-schluss",
@@ -139,7 +140,7 @@ export const ablauf = [
         ortId: "hotel",
         notiz:
           "Auschecken und heimfahren. Wer mag, läuft vorher noch einmal über den Markt — " +
-          "der öffnet sonntags ebenfalls um 11:00.",
+          "der öffnet sonntags ebenfalls um 11:00. Die Geschäfte haben am 1. Advent von 13 bis 18 Uhr geöffnet.",
       },
     ],
   },

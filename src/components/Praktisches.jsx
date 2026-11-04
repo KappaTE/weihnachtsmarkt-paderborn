@@ -100,9 +100,9 @@ export default function Praktisches() {
       </InfoKarte>
 
       <Unbestaetigt className="my-1.5">
-        Alle Angaben zum Markt 2026 (Zeitraum, Öffnungszeiten, Preise) stammen von
-        Portalseiten und sind nicht amtlich bestätigt — die Stadt hatte zum Zeitpunkt der
-        Erstellung noch 2025 online. Vor der Fahrt einmal auf der offiziellen Seite prüfen.
+        Zeitraum (20.11.–23.12.) und Öffnungszeiten 2026 sind von der Stadt bestätigt. Preise,
+        Busumleitung und AdventTicket stammen noch aus dem Vorjahr — vor der Fahrt einmal auf
+        der offiziellen Seite prüfen.
       </Unbestaetigt>
 
       <h3 className="zeit mt-2 mb-0.5 text-[11px] uppercase tracking-[0.15em] text-licht-400">Nützliche Links</h3>

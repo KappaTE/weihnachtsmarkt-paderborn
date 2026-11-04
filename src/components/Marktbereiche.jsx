@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { orteNachKategorie } from '../data/orte';
-import { marktzeiten, offizielleSeite } from '../data/markt';
+import { marktzeiten, marktfakten, offizielleSeite, programmSeite } from '../data/markt';
 import { useApp } from '../state/AppZustand';
 import MerkStern from './MerkStern';
 import Unbestaetigt from './Unbestaetigt';
@@ -58,9 +58,8 @@ function Bereiche() {
       </p>
 
       <Unbestaetigt>
-        Öffnungszeiten und Marktgebiet für 2026 stammen von Portalseiten. Die Stadt Paderborn
-        hatte zum Zeitpunkt der Erstellung noch die Angaben für 2025 online — vor der Fahrt
-        nochmal gegenprüfen.
+        Zeitraum und Öffnungszeiten 2026 hat die Stadt bestätigt. Welche Plätze genau zum
+        Markt gehören, stammt dagegen aus Portalangaben und dem Vorjahr.
       </Unbestaetigt>
 
       <div className="flex flex-col gap-2">
@@ -98,10 +97,29 @@ function Programm() {
       </div>
 
       <Unbestaetigt>
-        Bühnenprogramm und Live-Musik für 2026 sind noch nicht veröffentlicht. Sobald die Stadt
-        sie online stellt, kommen sie hierher — bis dahin wird nichts geraten. Auch die
-        Öffnungszeiten oben stammen von Portalseiten.
+        Bühnenprogramm und Konzerte für 2026 hat die Stadt noch nicht veröffentlicht — laut
+        ihrer Seite „folgt in Kürze“. Sobald es online ist, kommt es hierher. Bis dahin wird
+        nichts geraten.
       </Unbestaetigt>
+
+      <div className="flex flex-col gap-2">
+        {marktfakten.map(f => (
+          <div key={f.titel} className="flex flex-col gap-1 p-4 bg-holz-900/70 rounded-kante">
+            <h3 className="display text-[17px] font-semibold leading-tight text-creme-100">{f.titel}</h3>
+            <p className="text-[13px] leading-relaxed text-holz-300">{f.text}</p>
+          </div>
+        ))}
+      </div>
+
+      <a
+        href={programmSeite}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-3 px-4 py-3.5 bg-holz-900/60 hover:bg-holz-900 rounded-kante transition-colors"
+      >
+        <span className="flex-1 text-sm text-creme-100">Programmseite der Stadt</span>
+        <ExternalLink size={13} className="text-holz-400 shrink-0" />
+      </a>
 
       <a
         href={offizielleSeite}
