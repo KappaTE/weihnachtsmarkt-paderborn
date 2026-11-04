@@ -13,7 +13,7 @@ export const ablauf = [
   {
     tag: "sa",
     tagLabel: "Samstag, 28. November",
-    kontext: "Markt geöffnet 11:00 – 22:00",
+    kontext: "Markt geöffnet 11.00 – 22.00",
     hinweis:
       "Die festen Zeiten stehen, alles dazwischen gehört euch — die Lücken unten sind " +
       "so groß, wie sie sich anfühlen werden.",
@@ -115,7 +115,7 @@ export const ablauf = [
   {
     tag: "so",
     tagLabel: "Sonntag, 29. November",
-    kontext: "1. Advent",
+    kontext: "1. Advent · Markt 11.00 – 21.00",
     hinweis: "Kurzer Tag — Frühstück, dann Heimfahrt.",
     stationen: [
       {

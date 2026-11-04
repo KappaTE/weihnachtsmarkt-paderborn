@@ -5,12 +5,12 @@
 export const KATEGORIEN = ['hotel', 'restaurant', 'markt', 'bar', 'parken'];
 
 export const KAT_FARBE = {
-  hotel:      '#CA6161',  // Glühwein — Fixpunkt
-  restaurant: '#CA6161',  // Glühwein — Fixpunkt
-  markt:      '#E8A33D',  // Budenlicht — Marktbereiche
-  bar:        '#6FA88A',  // Tanne — Bars für nach 22 Uhr
-  parken:     '#8A7A6E',  // warmes Grau — Rückfallebene
-  unterwegs:  '#BCADA1',  // nur im Sheet, nicht auf der Karte
+  hotel:      '#F08F86',  // Glühweinrot — Fixpunkt
+  restaurant: '#F08F86',  // Glühweinrot — Fixpunkt
+  markt:      '#F0B860',  // Birnenlicht — Marktbereiche
+  bar:        '#7FD1AE',  // Tanne — Bars für nach 22 Uhr
+  parken:     '#8C95A3',  // Nebel — Rückfallebene
+  unterwegs:  '#C3C9D2',  // nur im Sheet, nicht auf der Karte
 };
 
 export const KAT_LABEL = {
@@ -21,3 +21,11 @@ export const KAT_LABEL = {
   parken:     'Parken',
   unterwegs:  'Unterwegs',
 };
+
+// Kartenfilter: Hotel und Brauhaus sind zusammen „Fest“ — die beiden Fixpunkte.
+export const FILTER = [
+  { id: 'fest',   label: 'Fest',   kategorien: ['hotel', 'restaurant'], farbe: '#F08F86' },
+  { id: 'markt',  label: 'Markt',  kategorien: ['markt'],               farbe: '#F0B860' },
+  { id: 'bar',    label: 'Bars',   kategorien: ['bar'],                 farbe: '#7FD1AE' },
+  { id: 'parken', label: 'Parken', kategorien: ['parken'],              farbe: '#8C95A3', eckig: true },
+];

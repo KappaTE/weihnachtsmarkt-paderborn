@@ -32,7 +32,7 @@ ist Datenpflege in `src/data/`, nicht Komponentenbau.
 - Inhalte ausschließlich in `src/data/*.js` als exportierte Arrays, Komponenten rendern nur.
   „Neuer Inhalt" heißt Datensatz ergänzen, nicht Komponente anfassen.
 - Jeder Ort braucht `id`, `lat`, `lng`, `mapsLink` — ohne Koordinaten fehlt er auf der Karte.
-- Mobile-first: `max-w-lg mx-auto`, feste Bottom-Nav. Desktop ist zweitrangig.
+- Mobile-first: `max-w-lg mx-auto`, schwebende Bottom-Nav. Desktop ist zweitrangig.
 - Deutsche Bezeichner in Daten und State (`adresse`, `oeffnung`, `aktiv`) — durchhalten.
 - Der Ablauf ist eine **maßstäbliche Zeitachse** (`Zeitachse.jsx`): `von`/`bis` in `ablauf.js`
   sind Minuten seit Mitternacht, daraus entsteht die Höhe. Lange Lücken sollen groß aussehen —
@@ -40,14 +40,19 @@ ist Datenpflege in `src/data/`, nicht Komponentenbau.
 
 ## Design
 
-- Palette „Budenlicht" als Tokens in `src/index.css`: `holz-*` (warmes Schwarz),
-  `gluehwein-*` (nur feste Termine), `licht-*` (Akzent), `tanne-*` (nur Bars).
-  Keine Tailwind-Standardfarben verwenden.
-- Schriften: Bricolage Grotesque (`.display`), IBM Plex Sans (Fließtext),
-  IBM Plex Mono (`.zeit`, für alle Uhrzeiten — tabellarische Ziffern).
-- Radius ist `rounded-kante` (2px). Runde Ecken nur bei Punkten und Markern.
-- Farben für die Leaflet-Pins stehen als Hex in `Karte.jsx` — SVG kann die Tokens nicht
-  auflösen. Bei Palettenänderung dort mit anpassen.
+- Design „Lichterkette" (Claude-Design-Handoff vom 04.11.2026) als Tokens in `src/index.css`:
+  `nacht-*` (Nachtblau, Flächen und Ränder), `nebel-*`/`schnee` (Text), `birne-*` (Licht,
+  Jetzt, Countdown), `gluehwein-300` (nur feste Termine), `tanne-300` (nur Bars).
+  Keine Tailwind-Standardfarben verwenden. `nacht-500` nur für Icons, nicht für Text.
+- Schriften: Schibsted Grotesk (alles), JetBrains Mono (`.zeit`, für alle Uhrzeiten —
+  tabellarische Ziffern).
+- Runde Formen: Karten 18–24px, Buttons und Filter als Pillen (`rounded-full`),
+  schwebende Navigation unten.
+- Start zeigt den Samstag als Lichterkette (`Lichterkette.jsx`, eine Birne pro Stunde 08–22).
+- Farben für die Leaflet-Pins stehen als Hex in `src/data/kategorien.js` — die Pins sind
+  HTML-Strings und können die Tokens nicht auflösen. Bei Palettenänderung dort mit anpassen.
+- OSM-Quellenangabe ist selbst gesetzt (`attributionControl={false}` in `Karte.jsx`),
+  weil die schwebende Navigation die Leaflet-Ecke verdecken würde. Nicht entfernen.
 
 ## Vorsicht
 

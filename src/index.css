@@ -2,74 +2,74 @@
 @import "leaflet/dist/leaflet.css";
 
 @theme {
-  /* Budenlicht — warme Nacht zwischen Holzbuden, Licht kommt punktuell */
-  --color-holz-950: #12100E;
-  --color-holz-900: #1A1614;
-  --color-holz-800: #2A2320;
-  --color-holz-700: #3A312C;
-  --color-holz-600: #4A3F3A;
-  --color-holz-500: #8A7A6E;
-  --color-holz-400: #9A8B80;
-  --color-holz-300: #BCADA1;
-  --color-creme-100: #F2EBE3;
+  /* Lichterkette — Nachtblau, Licht kommt nur von den Birnen */
+  --color-nacht-950: #0C0F14;   /* Grund */
+  --color-nacht-900: #151A22;   /* Karten */
+  --color-nacht-850: #1C2230;   /* Karten, hervorgehoben */
+  --color-nacht-800: #222935;   /* feine Ränder */
+  --color-nacht-700: #283040;   /* Ränder, kommende Zeitachse */
+  --color-nacht-650: #2E3646;
+  --color-nacht-600: #3A4250;   /* leere Birnen */
+  --color-nacht-500: #5A6372;   /* nur Icons, nicht für Text */
+  --color-nebel-400: #8C95A3;   /* Nebentext */
+  --color-nebel-200: #C3C9D2;   /* Fließtext auf Karten */
+  --color-schnee: #EEF0F3;      /* Haupttext */
 
-  /* Glühwein — ausschließlich für feste Termine */
-  --color-gluehwein-600: #8C2F2F;
-  --color-gluehwein-500: #A63A3A;
-  --color-gluehwein-400: #CA6161;
+  /* Birnenlicht — Akzent, Jetzt, Countdown */
+  --color-birne-400: #F0B860;
+  --color-birne-100: #FFE3B0;
+  --color-birne-ink: #14110C;   /* Schrift auf Bernstein */
 
-  /* Budenlicht — Akzent, Licht, Hervorhebung */
-  --color-licht-500: #D18F2C;
-  --color-licht-400: #E8A33D;
-  --color-licht-300: #F2C078;
+  /* Glühweinrot — ausschließlich feste Termine */
+  --color-gluehwein-300: #F08F86;
 
-  /* Tannengrün — Bars für nach 22 Uhr */
-  --color-tanne-600: #2F4A3C;
-  --color-tanne-400: #6FA88A;
+  /* Tanne — Bars für nach 22 Uhr */
+  --color-tanne-300: #7FD1AE;
 
-  /* Kanten statt Kissen — 2px lässt die Flächen wie Holz wirken, nicht wie App-Karten */
-  --radius-kante: 2px;
-
-  --font-display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
-  --font-sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+  --font-sans: "Schibsted Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
 }
 
 body {
   margin: 0;
-  background-color: #12100E;
-  color: #F2EBE3;
-  font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  background-color: #0C0F14;
+  color: #EEF0F3;
+  font-family: "Schibsted Grotesk", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 /* Uhrzeiten stehen exakt untereinander — sie sind das Rückgrat der Zeitachse. */
 .zeit {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum";
 }
 
-.display {
-  font-family: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
-  font-optical-sizing: auto;
+/* Ein warmer Schein oben links, wie von der ersten Birne. */
+.birnenschein {
+  position: absolute;
+  left: -60px;
+  top: 40px;
+  width: 420px;
+  height: 300px;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgba(240, 184, 96, 0.16), transparent);
 }
 
-/* Ein einzelner warmer Schein, wie eine Glühbirne über einer Bude. */
-.budenschein {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse 60% 40% at 50% 18%,
-    rgba(232, 163, 61, 0.16),
-    rgba(232, 163, 61, 0.04) 45%,
-    transparent 70%
-  );
+@keyframes glimmen {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
 }
+.glimmen { animation: glimmen 2.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .glimmen { animation: none; }
+}
+
+.ohne-scrollbar { scrollbar-width: none; }
+.ohne-scrollbar::-webkit-scrollbar { display: none; }
 
 *:focus-visible {
-  outline: 2px solid #E8A33D;
+  outline: 2px solid #F0B860;
   outline-offset: 2px;
 }
 
@@ -78,17 +78,10 @@ body {
   background-image: url(https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png);
 }
 
-/* OSM-Kacheln ans warme Schwarz angleichen (vorher auf Nachtblau kalibriert).
-   CARTOs dark_all braucht einen API-Key — OSM ist keyfrei.
+/* OSM-Kacheln in Nachtblau. CARTOs dark_all braucht einen API-Key — OSM ist keyfrei.
    Nur die Kachel-Ebene filtern, sonst würden auch die Marker invertiert. */
 .leaflet-tile-pane {
-  filter: invert(1) hue-rotate(155deg) brightness(0.82) contrast(0.92) sepia(0.35) saturate(0.6);
+  filter: invert(1) hue-rotate(180deg) brightness(0.72) contrast(0.95) saturate(0.35);
 }
 
-.leaflet-container { font-family: inherit; }
-.leaflet-control-attribution {
-  background: rgba(18, 16, 14, 0.75) !important;
-  color: #8A7A6E !important;
-  font-size: 9px !important;
-}
-.leaflet-control-attribution a { color: #9A8B80 !important; }
+.leaflet-container { font-family: inherit; background: #10141B; }

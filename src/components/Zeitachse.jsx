@@ -1,6 +1,5 @@
-import { MapPin } from 'lucide-react';
+import { istReisetag, minutenImTag, fmtMinuten, restzeit } from '../data/termine';
 import { getOrtById } from '../data/orte';
-import { minutenImTag, istReisetag } from '../data/termine';
 import useJetzt from '../state/useJetzt';
 import NaviButton from './NaviButton';
 
@@ -23,130 +22,198 @@ function dauerText(s) {
   return `${std} Std ${rest}`;
 }
 
+const zwischen = (x) => Math.min(1, Math.max(0, x));
+
 export default function Zeitachse({ tag }) {
   const jetzt = useJetzt();
-  const amTag = istReisetag(jetzt);
-  const jetztMin = minutenImTag(jetzt);
+  const amTag = istReisetag(jetzt) && tag.tag === 'sa';
+  const jm = minutenImTag(jetzt);
+  const st = tag.stationen;
 
-  // Genau ein Abschnitt trägt den Jetzt-Marker: der letzte, der bereits begonnen hat.
-  // Ohne diese Einschränkung wären alle vergangenen Punkte gleichzeitig markiert,
-  // weil ein Punkt kein `bis` hat.
-  let aktiverIndex = -1;
-  if (amTag) {
-    tag.stationen.forEach((s, i) => {
-      if (s.von != null && s.von <= jetztMin) aktiverIndex = i;
-    });
-  }
+  // Ein Abschnitt reicht bis zu seinem `bis`, sonst bis zum nächsten Abschnitt.
+  const ende = (i) => st[i].bis ?? st[i + 1]?.von ?? st[i].von;
+  // Anteil des Abschnitts, der schon vorbei ist — färbt die Linie und setzt die Jetzt-Marke.
+  const anteil = (i) => {
+    const s = st[i];
+    if (!amTag || s.von == null) return 0;
+    const e = ende(i);
+    if (e <= s.von) return jm >= s.von ? 1 : 0;
+    return zwischen((jm - s.von) / (e - s.von));
+  };
+  // Genau eine Jetzt-Marke: in dem Abschnitt, der gerade läuft.
+  const jetztIndex = amTag ? st.findIndex((s, i) => s.von != null && s.von <= jm && jm < ende(i)) : -1;
+  // Nächster fester Termin bekommt die Restzeit.
+  const naechsterFix = amTag ? st.findIndex(s => s.art === 'fix' && s.von != null && s.von > jm) : -1;
+  const n = st.length;
 
   return (
     <ol className="relative list-none p-0 m-0">
-      {tag.stationen.map((s, i) => {
-        const ort = s.ortId ? getOrtById(s.ortId) : null;
-        const frei = s.art === 'frei';
-        const fix = s.art === 'fix';
-        const jetztHier = i === aktiverIndex;
-
+      {st.map((s, i) => {
+        const a = anteil(i);
+        const letzte = i === n - 1;
+        // Begonnen und nicht mehr der laufende Abschnitt — also vorbei.
+        const vorbei = amTag && s.von != null && s.von <= jm && i !== jetztIndex;
         return (
           <li
             key={s.id}
-            className="relative grid grid-cols-[3.9rem_1.4rem_1fr] gap-x-1"
+            className="relative grid grid-cols-[40px_minmax(0,1fr)] pb-3.5"
             style={{ minHeight: dauerHoehe(s) }}
           >
-            {/* Uhrzeit */}
-            <div className="pt-px text-right">
-              <span
-                className={`zeit block text-[13px] leading-5 ${
-                  fix ? 'text-licht-400 font-medium' : 'text-holz-400'
-                }`}
-              >
-                {s.zeit}
-              </span>
-              {dauerText(s) && (
-                <span className="zeit block text-[11px] leading-4 text-holz-500 mt-0.5">
-                  {dauerText(s)}
-                </span>
+            {!letzte && <Linie art={s.art} anteil={a} />}
+            <Marke art={s.art} vorbei={vorbei} />
+
+            <div className="col-start-2 min-w-0">
+              {s.art === 'fix' && (
+                <FixKarte
+                  s={s}
+                  vorbei={vorbei}
+                  rest={i === naechsterFix ? restzeit(new Date(jetzt.getFullYear(), jetzt.getMonth(), jetzt.getDate(), 0, s.von), jetzt) : null}
+                />
               )}
+              {s.art === 'frei' && <Frei s={s} />}
+              {s.art === 'punkt' && <PunktZeile s={s} />}
             </div>
 
-            {/* Spur mit Marke */}
-            <div className="relative flex justify-center" aria-hidden="true">
-              <span
-                className={`absolute top-2 bottom-0 w-px ${
-                  frei
-                    ? 'border-l border-dashed border-holz-700'
-                    : 'bg-holz-700'
-                }`}
-              />
-              <span
-                className={
-                  fix
-                    ? 'relative z-10 mt-1.5 w-2.5 h-2.5 rounded-full bg-gluehwein-500 ring-4 ring-holz-950'
-                    : frei
-                      ? 'relative z-10 mt-2 w-1.5 h-1.5 rounded-full bg-holz-700 ring-4 ring-holz-950'
-                      : 'relative z-10 mt-2 w-1.5 h-1.5 rounded-full bg-holz-600 ring-4 ring-holz-950'
-                }
-              />
-            </div>
-
-            {/* Inhalt */}
-            <div className={`pb-8 ${frei ? 'pt-0.5' : ''}`}>
-              <h3
-                className={
-                  fix
-                    ? 'display text-creme-100 text-lg font-semibold leading-tight'
-                    : frei
-                      ? 'display text-holz-300 text-base font-medium leading-tight'
-                      : 'display text-creme-100 text-base font-medium leading-tight'
-                }
-              >
-                {s.name}
-              </h3>
-
-              {s.ort && (
-                <p className="flex items-center gap-1.5 text-holz-400 text-xs mt-0.5">
-                  <MapPin size={11} className="shrink-0" />
-                  {s.ort}
-                </p>
-              )}
-
-              {s.ortOffen && (
-                <p className="flex items-center gap-1.5 text-licht-300 text-xs mt-1">
-                  <MapPin size={11} className="shrink-0" />
-                  {s.ortOffen}
-                </p>
-              )}
-
-              {jetztHier && (
-                <p className="zeit flex items-center gap-1.5 text-licht-400 text-[11px] leading-none mt-1.5 uppercase tracking-[0.1em]">
-                  <span className="w-[7px] h-[7px] rounded-full bg-licht-400 shadow-[0_0_10px_#E8A33D] animate-pulse" />
-                  ihr seid hier
-                </p>
-              )}
-
-              <p className="text-holz-300 text-sm mt-1.5 leading-relaxed max-w-prose">
-                {s.notiz}
-              </p>
-
-              {s.vermerke && (
-                <ul className="mt-2 space-y-1 list-none p-0">
-                  {s.vermerke.map((v, i) => (
-                    <li key={i} className="flex gap-2 text-holz-400 text-xs leading-relaxed">
-                      <span className="text-holz-500 select-none">·</span>
-                      {v}
-                    </li>
-                  ))}
-                </ul>
-              )}
-
-              {ort?.naviLink && (
-                <div className="mt-2.5">
-                  <NaviButton ort={ort} label="Route starten" />
-                </div>
-              )}
-            </div>
+            {i === jetztIndex && <JetztMarke anteil={a} zeit={fmtMinuten(jm)} />}
           </li>
         );
       })}
     </ol>
+  );
+}
+
+function Linie({ art, anteil }) {
+  const gestrichelt = art === 'frei';
+  const teil = (farbe) =>
+    gestrichelt ? { borderLeft: `2px dashed ${farbe}` } : { background: farbe, width: 2 };
+  return (
+    <span aria-hidden="true">
+      {anteil > 0 && (
+        <span
+          className="absolute left-[13px]"
+          style={{ top: 8, height: `calc((100% - 8px) * ${anteil})`, ...teil('rgba(240,184,96,0.45)') }}
+        />
+      )}
+      {anteil < 1 && (
+        <span
+          className="absolute left-[13px] bottom-0"
+          style={{ top: `calc(8px + (100% - 8px) * ${anteil})`, ...teil('#283040') }}
+        />
+      )}
+    </span>
+  );
+}
+
+function Marke({ art, vorbei }) {
+  if (art === 'frei') return null;
+  if (art === 'fix') {
+    return (
+      <span
+        aria-hidden="true"
+        className={`absolute left-[7px] top-[15px] w-3.5 h-3.5 rounded-full bg-gluehwein-300 ${
+          vorbei ? 'opacity-60' : 'shadow-[0_0_14px_rgba(240,143,134,0.6)]'
+        }`}
+      />
+    );
+  }
+  return (
+    <span
+      aria-hidden="true"
+      className="absolute left-2 top-[15px] w-3 h-3 rounded-full border-[1.5px] border-nacht-600 bg-nacht-950"
+    />
+  );
+}
+
+function FixKarte({ s, vorbei, rest }) {
+  const ort = s.ortId ? getOrtById(s.ortId) : null;
+  return (
+    <div
+      className={`px-3.5 py-[11px] rounded-[18px] flex flex-col gap-[3px] ${
+        vorbei ? 'bg-nacht-900 opacity-60' : 'bg-nacht-850 border border-nacht-650'
+      }`}
+    >
+      <span className="flex items-baseline gap-2.5">
+        <span className="zeit text-[13px] font-medium text-gluehwein-300">{s.zeit}</span>
+        <h3 className="text-base font-semibold leading-tight">{s.name}</h3>
+        {rest && <span className="zeit ml-auto shrink-0 text-[11px] text-birne-400">in {rest}</span>}
+      </span>
+      {s.ort && <span className="text-xs text-nebel-400">{s.ort}</span>}
+      {s.ortOffen && <span className="text-xs text-birne-100">{s.ortOffen}</span>}
+      {/* Erledigte Termine schrumpfen auf Uhrzeit, Titel und Ort. */}
+      {!vorbei && <Notizen s={s} />}
+      {!vorbei && ort?.naviLink && (
+        <span className="mt-2">
+          <NaviButton ort={ort} label="Route starten" />
+        </span>
+      )}
+    </div>
+  );
+}
+
+function Frei({ s }) {
+  return (
+    <div className="flex flex-col gap-1 pt-0.5">
+      <span className="flex items-baseline gap-2.5">
+        <span className="zeit text-[28px] font-light leading-none tracking-[-0.04em] text-nebel-400">{dauerText(s)}</span>
+        <h3 className="text-[15px] font-medium text-nebel-200">{s.name}</h3>
+      </span>
+      <span className="zeit text-[11px] text-nebel-400">ab {s.zeit}</span>
+      <Notizen s={s} />
+    </div>
+  );
+}
+
+function PunktZeile({ s }) {
+  const ort = s.ortId ? getOrtById(s.ortId) : null;
+  const inhalt = (
+    <>
+      <span className="flex items-baseline gap-2.5">
+        <span className="zeit text-[13px] text-nebel-400">{s.zeit}</span>
+        <h3 className="text-base font-medium leading-tight">{s.name}</h3>
+        {dauerText(s) && <span className="zeit ml-auto shrink-0 text-[11px] text-nebel-400">{dauerText(s)}</span>}
+      </span>
+      {s.ort && <span className="text-xs text-nebel-400">{s.ort}</span>}
+      <Notizen s={s} />
+      {ort?.naviLink && (
+        <span className="mt-2">
+          <NaviButton ort={ort} label="Route starten" />
+        </span>
+      )}
+    </>
+  );
+  // Punkte mit Ort sind Ziele — die bekommen eine ruhige Karte, reine Uhrzeiten nicht.
+  return s.ort ? (
+    <div className="px-3.5 py-[11px] rounded-[18px] bg-nacht-900 flex flex-col gap-[3px]">{inhalt}</div>
+  ) : (
+    <div className="pt-[11px] flex flex-col gap-[3px]">{inhalt}</div>
+  );
+}
+
+function Notizen({ s }) {
+  return (
+    <>
+      {s.notiz && <p className="mt-1 text-[12.5px] leading-[1.45] text-nebel-400 text-pretty">{s.notiz}</p>}
+      {s.vermerke?.map((v, i) => (
+        <p key={i} className="flex gap-2 text-xs leading-normal text-nebel-400">
+          <span className="text-nacht-500 select-none">·</span>
+          {v}
+        </p>
+      ))}
+    </>
+  );
+}
+
+function JetztMarke({ anteil, zeit }) {
+  return (
+    <div
+      className="absolute inset-x-0 z-10 pointer-events-none"
+      style={{ top: `calc(8px + (100% - 8px) * ${anteil})` }}
+    >
+      <span className="absolute inset-x-0 -top-px h-0.5 bg-birne-400 shadow-[0_0_12px_rgba(240,184,96,0.7)]" />
+      <span className="glimmen absolute left-[6px] -top-2 w-4 h-4 rounded-full bg-birne-400 shadow-[0_0_0_4px_rgba(240,184,96,0.2),0_0_20px_4px_rgba(240,184,96,0.6)]" />
+      <span className="zeit absolute right-0 -top-3 px-2.5 py-[5px] rounded-full bg-birne-400 text-birne-ink text-[11px] font-medium leading-none">
+        Jetzt · {zeit}
+      </span>
+    </div>
   );
 }

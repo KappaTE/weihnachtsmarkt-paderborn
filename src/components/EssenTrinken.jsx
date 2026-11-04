@@ -1,3 +1,4 @@
+import { ChevronRight } from 'lucide-react';
 import { klassiker, aufwaermen } from '../data/essen';
 import { useApp } from '../state/AppZustand';
 import Unbestaetigt from './Unbestaetigt';
@@ -9,51 +10,52 @@ export default function EssenTrinken({ teil = 'essen' }) {
 
   if (teil === 'aufwaermen') {
     return (
-      <div className="flex flex-col gap-3">
-        <p className="text-holz-400 text-sm leading-relaxed mb-1">
+      <>
+        <p className="text-[13.5px] leading-[1.45] text-nebel-400">
           Sechseinhalb Stunden draußen Ende November sind lang. Zwei verlässlich warme Orte:
         </p>
-        {aufwaermen.map(a => (
-          <button
-            key={a.id}
-            type="button"
-            onClick={() => openOrt(a.ortId)}
-            className="flex flex-col gap-1.5 p-4 bg-holz-900/70 hover:bg-holz-900 rounded-kante text-left transition-colors"
-          >
-            <h4 className="display text-[17px] font-semibold leading-tight text-creme-100">{a.titel}</h4>
-            <p className="text-[13px] leading-relaxed text-holz-300">{a.text}</p>
-            <span className="mt-0.5 text-xs text-licht-500">Ort ansehen →</span>
-          </button>
-        ))}
-      </div>
+        <div className="flex flex-col gap-2">
+          {aufwaermen.map(a => (
+            <button
+              key={a.id}
+              type="button"
+              onClick={() => openOrt(a.ortId)}
+              className="flex items-center gap-2 p-4 rounded-[18px] bg-nacht-900 hover:bg-nacht-850 text-left transition-colors"
+            >
+              <span className="flex-1 min-w-0 flex flex-col gap-[5px]">
+                <h3 className="text-[17px] font-semibold leading-[1.15]">{a.titel}</h3>
+                <p className="text-[13px] leading-[1.45] text-nebel-200 text-pretty">{a.text}</p>
+              </span>
+              <ChevronRight size={16} className="text-nacht-500 shrink-0" />
+            </button>
+          ))}
+        </div>
+      </>
     );
   }
 
+  // Nummern statt Emojis — die Liste soll ruhig bleiben.
   return (
-    <div className="flex flex-col gap-4">
-      <p className="text-holz-400 text-sm leading-relaxed text-pretty">
-        Mittags bewusst nur kleine Portionen an den Ständen — sonst hat um 17:30 im Brauhaus
-        niemand mehr Hunger. Im Stehen essen spart außerdem das Problem, für 16 Leute
-        gleichzeitig Sitzplätze zu finden.
+    <>
+      <p className="text-[13.5px] leading-[1.45] text-nebel-400 text-pretty">
+        Mittags bewusst nur kleine Portionen, sonst hat um 17:30 im Brauhaus niemand mehr
+        Hunger. Im Stehen essen erspart die Platzsuche für 16.
       </p>
 
       <Unbestaetigt>
-        Bewusst keine namentlichen Stände: welcher Anbieter 2026 wo steht, ist nicht
-        veröffentlicht. Die Liste sind die Klassiker, die es auf jedem westfälischen
-        Weihnachtsmarkt gibt.
+        Bewusst keine namentlichen Stände: Welcher Anbieter 2026 wo steht, ist nicht
+        veröffentlicht. Die Liste sind die Klassiker westfälischer Weihnachtsmärkte.
       </Unbestaetigt>
 
-      <div className="flex flex-col border-t border-holz-800">
-        {klassiker.map(k => (
-          <div key={k.id} className="flex items-start gap-3.5 py-3.5 border-b border-holz-800">
-            <span className="w-7 shrink-0 text-center text-2xl leading-none" aria-hidden="true">{k.emoji}</span>
-            <div className="min-w-0 flex flex-col gap-[3px]">
-              <h3 className="text-sm font-semibold text-creme-100">{k.name}</h3>
-              <p className="text-[13px] leading-normal text-holz-400">{k.notiz}</p>
-            </div>
-          </div>
+      <ol className="flex flex-col list-none p-0 m-0">
+        {klassiker.map((k, i) => (
+          <li key={k.id} className="grid grid-cols-[34px_1fr] gap-x-1.5 gap-y-[3px] py-3 border-b border-nacht-850">
+            <span className="zeit row-span-2 pt-0.5 text-xs text-birne-400">{String(i + 1).padStart(2, '0')}</span>
+            <h3 className="text-[15px] font-semibold">{k.name}</h3>
+            <p className="text-[13px] leading-[1.4] text-nebel-400 text-pretty">{k.notiz}</p>
+          </li>
         ))}
-      </div>
-    </div>
+      </ol>
+    </>
   );
 }

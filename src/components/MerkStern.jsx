@@ -16,8 +16,8 @@ export default function MerkStern({ ortId, name }) {
     >
       <Star
         size={18}
-        strokeWidth={1.75}
-        className={an ? 'fill-licht-400 text-licht-400' : 'text-holz-500'}
+        strokeWidth={an ? 0 : 1.75}
+        className={an ? 'fill-birne-400 drop-shadow-[0_0_6px_rgba(240,184,96,0.6)]' : 'text-nacht-500'}
       />
     </button>
   );

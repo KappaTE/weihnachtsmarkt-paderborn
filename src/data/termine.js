@@ -1,13 +1,14 @@
 // src/data/termine.js
 // Die harten Uhrzeiten des Wochenendes. Basis für den Hinweis "was kommt als Nächstes".
 // Monat ist 0-basiert: 10 = November. Lokale Gerätezeit — alle sind vor Ort.
+// `bis` + `kurz` ergeben den Countdown-Satz: „40 Min bis zum Check-in“.
 
 export const termine = [
-  { id: 'fruehstueck', zeit: new Date(2026, 10, 28,  8, 30), name: 'Gemeinsames Frühstück', ort: 'Franzes, Arnsberg-Müschede' },
-  { id: 'ankunft',  zeit: new Date(2026, 10, 28, 11,  0), name: 'Ankunft in Paderborn', ort: 'Hotel zur Mühle' },
-  { id: 'checkin',  zeit: new Date(2026, 10, 28, 15,  0), name: 'Check-in',             ort: 'Hotel zur Mühle' },
-  { id: 'essen',    zeit: new Date(2026, 10, 28, 17, 30), name: 'Tisch im Brauhaus',    ort: 'Paderborner Brauhaus, Kisau 2' },
-  { id: 'marktzu',  zeit: new Date(2026, 10, 28, 22,  0), name: 'Markt schließt',       ort: 'Innenstadt' },
+  { id: 'fruehstueck', zeit: new Date(2026, 10, 28,  8, 30), name: 'Gemeinsames Frühstück', ort: 'Franzes, Arnsberg-Müschede', bis: 'zum', kurz: 'Frühstück' },
+  { id: 'ankunft',  zeit: new Date(2026, 10, 28, 11,  0), name: 'Ankunft in Paderborn', ort: 'Hotel zur Mühle', bis: 'zur', kurz: 'Ankunft' },
+  { id: 'checkin',  zeit: new Date(2026, 10, 28, 15,  0), name: 'Check-in',             ort: 'Hotel zur Mühle', bis: 'zum', kurz: 'Check-in' },
+  { id: 'essen',    zeit: new Date(2026, 10, 28, 17, 30), name: 'Tisch im Brauhaus',    ort: 'Paderborner Brauhaus, Kisau 2', bis: 'zum', kurz: 'Brauhaus' },
+  { id: 'marktzu',  zeit: new Date(2026, 10, 28, 22,  0), name: 'Markt schließt',       ort: 'Innenstadt', bis: 'zum', kurz: 'Marktschluss' },
 ];
 
 export const reisetag = new Date(2026, 10, 28, 0, 0);

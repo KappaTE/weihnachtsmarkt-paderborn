@@ -1,43 +1,31 @@
 import { useState } from 'react';
 import { ablauf } from '../data/ablauf';
 import Zeitachse from './Zeitachse';
-import NaechsterPunkt from './NaechsterPunkt';
 import BarListe from './BarListe';
+import Segmente from './Segmente';
 
 export default function Ablauf() {
-  const [aktiv, setAktiv] = useState(0);
-  const tag = ablauf[aktiv];
+  const [aktiv, setAktiv] = useState('sa');
+  const tag = ablauf.find(t => t.tag === aktiv);
 
   return (
-    <section className="px-[18px] pt-[22px] pb-10">
-      <h2 className="display text-3xl font-bold text-creme-100 mb-1 tracking-tight">Ablauf</h2>
-      <p className="zeit text-licht-400 text-xs uppercase tracking-[0.15em] mb-4">
-        {tag.kontext}
-      </p>
+    <section className="px-5 pt-[calc(14px+env(safe-area-inset-top))] flex flex-col gap-3.5">
+      <div className="flex items-center justify-between gap-3">
+        <h2 className="text-[34px] font-bold leading-none tracking-[-0.02em]">Ablauf</h2>
+        <Segmente
+          label="Tag"
+          optionen={ablauf.map(t => ({ id: t.tag, label: t.tag === 'sa' ? 'Samstag' : 'Sonntag' }))}
+          aktiv={aktiv}
+          onWahl={setAktiv}
+        />
+      </div>
+      <p className="zeit text-xs text-birne-400">{tag.kontext}</p>
 
-      <div className="flex border border-holz-800 rounded-kante overflow-hidden mb-[18px]">
-        {ablauf.map((t, i) => (
-          <button
-            key={t.tag}
-            onClick={() => setAktiv(i)}
-            className={`flex-1 min-h-[42px] px-3 text-sm font-medium transition-colors ${
-              i === aktiv
-                ? 'bg-holz-900 text-creme-100'
-                : 'bg-transparent text-holz-400 hover:text-creme-100'
-            }`}
-          >
-            {t.tag === 'sa' ? 'Samstag' : 'Sonntag'}
-          </button>
-        ))}
+      <div className="mt-3">
+        <Zeitachse tag={tag} />
       </div>
 
-      <p className="text-holz-400 text-sm leading-relaxed mb-[22px] text-pretty">{tag.hinweis}</p>
-
-      <NaechsterPunkt className="mb-7" />
-
-      <Zeitachse tag={tag} />
-
-      {tag.tag === 'sa' && <BarListe className="mt-3" />}
+      {tag.tag === 'sa' && <BarListe className="mt-2" />}
     </section>
   );
 }
