@@ -7,11 +7,11 @@ export const buchung = {
   hotel: 'Hotel zur Mühle',
   telefon: '+49 5251 10750',
   telefonLink: 'tel:+49525110750',
-  zimmerGesamt: 7,
+  zimmerGesamt: 6,
   stornierung: 'kostenlos bis 2 Tage vor Anreise',
 };
 
-// Zimmerbelegung laut Liste fürs Hotel (Stand 20.11.2026). Die Buchung ist von 8 auf 7 Zimmer
+// Zimmerbelegung laut Liste fürs Hotel (Stand 20.11.2026). Die Buchung ist von 8 auf 6 Zimmer
 // geschrumpft. Bewusst nur Vornamen: Seite und Repository sind öffentlich — Nachnamen,
 // Adressen und Mail-Adressen aus der Hotelliste gehören nicht hierher.
 export const zimmer = [
@@ -21,8 +21,6 @@ export const zimmer = [
   { typ: 'Standard Doppelzimmer', gaeste: ['Karl', 'Sabine'] },
   { typ: 'Standard Doppelzimmer', gaeste: ['Susanne', 'Frank'] },
   { typ: 'Großes Zimmer',         gaeste: ['Tobias', 'Nele'] },
-  // Siebtes Zimmer stand nicht auf der Liste.
-  { typ: null,                    gaeste: null },
 ];
 
 // Wörtlich aus der Antwort des Hotels — nicht paraphrasieren, daran hängt der Ablauf.
