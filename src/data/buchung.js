@@ -7,21 +7,22 @@ export const buchung = {
   hotel: 'Hotel zur Mühle',
   telefon: '+49 5251 10750',
   telefonLink: 'tel:+49525110750',
-  zimmerGesamt: 8,
+  zimmerGesamt: 7,
   stornierung: 'kostenlos bis 2 Tage vor Anreise',
 };
 
-// 8 Doppelzimmer laut Buchung. Wer wo schläft, steht noch nicht fest —
-// die Namen kommen später dazu.
+// Zimmerbelegung laut Liste fürs Hotel (Stand 20.11.2026). Die Buchung ist von 8 auf 7 Zimmer
+// geschrumpft. Bewusst nur Vornamen: Seite und Repository sind öffentlich — Nachnamen,
+// Adressen und Mail-Adressen aus der Hotelliste gehören nicht hierher.
 export const zimmer = [
-  { nr: 1, typ: 'Standard Doppelzimmer', gaeste: null },
-  { nr: 2, typ: 'Budget Doppelzimmer',   gaeste: null },
-  { nr: 3, typ: 'Großes Doppelzimmer',   gaeste: null },
-  { nr: 4, typ: 'Standard Doppelzimmer', gaeste: null },
-  { nr: 5, typ: 'Großes Doppelzimmer',   gaeste: null },
-  { nr: 6, typ: 'Großes Doppelzimmer',   gaeste: null },
-  { nr: 7, typ: 'Budget Doppelzimmer',   gaeste: null },
-  { nr: 8, typ: 'Standard Doppelzimmer', gaeste: null },
+  { typ: 'Budget Doppelzimmer',   gaeste: ['Philip', 'Nadine'] },
+  { typ: 'Budget Doppelzimmer',   gaeste: ['Anni', 'Karl'] },
+  { typ: 'Standard Doppelzimmer', gaeste: ['Fabian', 'Lea'] },
+  { typ: 'Standard Doppelzimmer', gaeste: ['Karl', 'Sabine'] },
+  { typ: 'Standard Doppelzimmer', gaeste: ['Susanne', 'Frank'] },
+  { typ: 'Großes Zimmer',         gaeste: ['Tobias', 'Nele'] },
+  // Siebtes Zimmer stand nicht auf der Liste.
+  { typ: null,                    gaeste: null },
 ];
 
 // Wörtlich aus der Antwort des Hotels — nicht paraphrasieren, daran hängt der Ablauf.

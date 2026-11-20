@@ -15,7 +15,7 @@ const links = [
 ];
 
 // "Standard Doppelzimmer" → "Standard DZ" — sonst bricht das Raster auf dem Handy um.
-const kurz = (typ) => typ.replace(/\s*Doppelzimmer$/, ' DZ').replace(/^Großes/, 'Groß');
+const kurz = (typ) => typ.replace(/\s*Doppelzimmer$/, ' DZ');
 
 export default function Praktisches() {
   const { openOrt } = useApp();
@@ -41,20 +41,19 @@ export default function Praktisches() {
           <span className="text-[12.5px] text-nebel-400">Anrufen</span>
         </a>
         <p className="text-[13px] text-nebel-400">
-          <span className="text-schnee">{buchung.zimmerGesamt} Doppelzimmer</span> für die
+          <span className="text-schnee">{buchung.zimmerGesamt} Zimmer</span> für die
           Gruppe · Stornierung {buchung.stornierung}
         </p>
-        <ul className="grid grid-cols-2 gap-1.5 list-none p-0 m-0">
-          {zimmer.map(z => (
-            <li key={z.nr} className="flex items-center gap-2 px-2.5 py-2 rounded-xl bg-nacht-950">
-              <span className="zeit text-[11px] font-medium text-birne-400">{z.nr}</span>
-              <span className="min-w-0 text-[12.5px] text-nebel-200">{z.gaeste ?? kurz(z.typ)}</span>
+        <ul className="grid grid-cols-2 gap-1.5 list-none p-0 m-0" aria-label="Zimmerbelegung">
+          {zimmer.map((z, i) => (
+            <li key={i} className="flex flex-col gap-0.5 px-2.5 py-2 rounded-xl bg-nacht-950">
+              <span className="zeit text-[10.5px] text-birne-400">{z.typ ? kurz(z.typ) : 'Zimmer'}</span>
+              <span className={`text-[13px] leading-tight ${z.gaeste ? 'font-medium text-schnee' : 'text-nebel-400'}`}>
+                {z.gaeste ? z.gaeste.join(' & ') : 'Belegung folgt'}
+              </span>
             </li>
           ))}
         </ul>
-        <p className="text-xs leading-[1.45] text-nebel-400">
-          Wer in welchem Zimmer schläft, steht noch nicht fest. {hotelAussagen.namensliste}
-        </p>
         <NaviButton ort={hotel} label="Route zum Hotel" voll />
       </InfoKarte>
 

@@ -127,8 +127,8 @@ export const ablauf = [
         ort: "Hotel zur Mühle",
         ortId: "hotel",
         notiz:
-          "Nicht im Zimmerpreis enthalten — das Frühstück wird bei der Anreise dazugebucht. " +
-          "Zeiten am Vorabend an der Rezeption erfragen.",
+          "Laut Zimmerliste ist für alle Frühstück angemeldet — es ist nicht im Zimmerpreis " +
+          "enthalten und wird beim Hotel dazugebucht. Zeiten am Vorabend an der Rezeption erfragen.",
       },
       {
         id: "so-rueckreise",

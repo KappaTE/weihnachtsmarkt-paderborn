@@ -23,7 +23,7 @@ export const orte = [
     kategorie: "hotel",
     fixpunkt: true,
     beschreibung: "Unser Quartier. Liegt mitten in der Altstadt — vom Markt sind es keine 5 Minuten.",
-    tipp: "8 Doppelzimmer für die Gruppe. Telefon +49 5251 10750.",
+    tipp: "7 Zimmer für die Gruppe — wer wo schläft, steht unter Info. Telefon +49 5251 10750.",
     oeffnung: "Zimmer je nach Verfügbarkeit · Gepäck ab Ankunft",
     lat: 51.72033,
     lng: 8.75247,
