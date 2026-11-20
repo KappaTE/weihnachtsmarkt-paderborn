@@ -16,6 +16,9 @@ ist Datenpflege in `src/data/`, nicht Komponentenbau.
 - Dev: `npm run dev -- --port 5175`
 - Build: `npm run build` — **vorher den Dev-Server stoppen**. Parallel dazu blockiert er sich
   und braucht Minuten statt der üblichen ~300 ms.
+- Hängt `vite build` ohne Dev-Server trotzdem: iCloud hat Dateien in `node_modules` ausgelagert
+  (`ls -lO node_modules/vite/dist/node/chunks` zeigt `dataless`). Dann das Projekt ohne
+  `node_modules` per `rsync` in den Scratchpad kopieren und dort `npm ci` + Build ausführen.
 - `npm run lint` hängt in diesem Verzeichnis ohne Ausgabe (auch `npx eslint src`), Ursache
   ungeklärt — vermutlich iCloud. Als Ersatz taugt ein erfolgreicher Build plus ein Blick auf
   verwaiste Imports.
