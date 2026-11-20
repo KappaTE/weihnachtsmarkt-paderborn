@@ -7,7 +7,7 @@ export const klassiker = [
     id: "gluehwein",
     name: "Glühwein",
     emoji: "🍷",
-    notiz: "Pfand auf die Tasse — meist 2–4 €, gibt es beim Rückgeben zurück.",
+    notiz: "Kommt in der Paderborner Weihnachtsmarkttasse. Die Tasse 2026 kostet 2,50 € — wer sie behält, hat ein Andenken.",
   },
   {
     id: "punsch-alkoholfrei",
@@ -65,11 +65,19 @@ export const aufwaermen = [
       "der zentralen Lage.",
   },
   {
+    id: "aw-winterplaza",
+    ortId: "kamp",
+    titel: "Winter-Plaza",
+    text:
+      "Neu: großes Zelt mit transparentem Dach vor der Marktkirche, rund 600 trockene Sitz- " +
+      "und Stehplätze. Hier findet die ganze Gruppe am ehesten gemeinsam Platz.",
+  },
+  {
     id: "aw-libori",
     ortId: "liborigalerie",
     titel: "Libori-Galerie",
     text:
-      "Überdachtes Einkaufszentrum mitten im Marktgebiet — beheizt, mit Toiletten, " +
+      "Überdachtes Einkaufszentrum mitten im Marktgebiet — beheizt, Toiletten kostenpflichtig, " +
       "und näher dran, wenn der Weg zum Hotel gerade zu weit ist.",
   },
 ];

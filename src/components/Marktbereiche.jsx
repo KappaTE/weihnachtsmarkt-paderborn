@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { orteNachKategorie } from '../data/orte';
-import { marktzeiten, marktfakten, offizielleSeite, programmSeite } from '../data/markt';
+import { marktzeiten, marktfakten, offizielleSeite, pressemitteilung } from '../data/markt';
 import { useApp } from '../state/AppZustand';
 import MerkStern from './MerkStern';
 import Segmente from './Segmente';
@@ -43,8 +43,8 @@ function Bereiche() {
       </p>
 
       <Unbestaetigt>
-        Zeitraum und Öffnungszeiten 2026 hat die Stadt bestätigt. Welche Plätze genau
-        dazugehören, stammt aus Portalangaben und dem Vorjahr.
+        Zeitraum, Öffnungszeiten und Marktgebiet 2026 hat die Stadt bestätigt. Rund 80 Stände
+        von Westernstraße bis Domplatz, dazu neu die Winter-Plaza.
       </Unbestaetigt>
 
       <div className="flex flex-col gap-2">
@@ -80,9 +80,9 @@ function Programm() {
       </div>
 
       <Unbestaetigt>
-        Bühnenprogramm und Konzerte für 2026 hat die Stadt noch nicht veröffentlicht — laut
-        ihrer Seite „folgt in Kürze“. Sobald es online ist, kommt es hierher. Bis dahin wird
-        nichts geraten.
+        Einen Konzertplan mit einzelnen Terminen hat die Stadt nicht veröffentlicht. Bestätigt
+        ist nur, dass freitags und samstags kostenlos Live-Musik läuft — wer am 28.11. spielt,
+        steht nirgends. Daher nichts geraten.
       </Unbestaetigt>
 
       <div className="flex flex-col gap-2">
@@ -95,8 +95,8 @@ function Programm() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <Verweis href={programmSeite}>Programmseite der Stadt</Verweis>
-        <Verweis href={offizielleSeite}>Offizielle Seite der Stadt</Verweis>
+        <Verweis href={pressemitteilung}>Pressemitteilung der Stadt zum Markt 2026</Verweis>
+        <Verweis href={offizielleSeite}>Weihnachtsmarkt-Seite der Stadt</Verweis>
       </div>
     </>
   );

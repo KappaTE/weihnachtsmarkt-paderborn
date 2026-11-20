@@ -1,6 +1,7 @@
 import { ChevronRight, Phone } from 'lucide-react';
 import { orteNachKategorie, getOrtById } from '../data/orte';
 import { buchung, zimmer, hotelAussagen } from '../data/buchung';
+import { toiletten, notfall } from '../data/markt';
 import { useApp } from '../state/AppZustand';
 import Unbestaetigt from './Unbestaetigt';
 import NaviButton from './NaviButton';
@@ -91,10 +92,25 @@ export default function Praktisches() {
           fünf Minuten auseinander. Bus braucht ihr eigentlich nicht.
         </p>
         <p className="text-[13px] leading-[1.45] text-nebel-400 text-pretty">
-          Falls doch: Während des Weihnachtsmarkts halten die Busse an{' '}
+          Falls doch: Am Wochenende umfahren die Busse die Innenstadt ganztägig und halten an{' '}
           <span className="text-schnee">Westerntor</span> und{' '}
           <span className="text-schnee">Am Bogen</span> statt am Rathausplatz. Das
-          AdventTicket kostet rund 2,00 € für 90 Minuten, am Wochenende fahren Nachtbusse.
+          AdventTicket kostet 2,00 € für 90 Minuten (im Bus 2,50 €), in der Nacht von Samstag
+          auf Sonntag fahren Nachtbusse ab Westerntor.
+        </p>
+      </InfoKarte>
+
+      <InfoKarte titel="Toiletten & Notfall">
+        <ul className="flex flex-col gap-1.5 list-none p-0 m-0">
+          {toiletten.map(t => (
+            <li key={t} className="flex gap-2 text-[13px] leading-[1.45] text-nebel-200">
+              <span className="text-nacht-500 select-none">·</span>
+              {t}
+            </li>
+          ))}
+        </ul>
+        <p className="px-[13px] py-[11px] rounded-[14px] bg-nacht-850 text-[13px] leading-[1.45] text-schnee text-pretty">
+          {notfall}
         </p>
       </InfoKarte>
 
@@ -107,9 +123,9 @@ export default function Praktisches() {
       </InfoKarte>
 
       <Unbestaetigt>
-        Zeitraum (20.11.–23.12.) und Öffnungszeiten 2026 sind von der Stadt bestätigt. Preise,
-        Busumleitung und AdventTicket stammen noch aus dem Vorjahr — vor der Fahrt einmal auf
-        der offiziellen Seite prüfen.
+        Markt, Öffnungszeiten, Busse und Toiletten sind von der Stadt für 2026 bestätigt.
+        Nicht amtlich sind nur die Öffnungszeiten der Bars (OpenStreetMap) und die
+        Parkhauspreise.
       </Unbestaetigt>
 
       <h3 className="zeit mt-2 text-[11px] font-medium uppercase tracking-[0.08em] text-birne-400">Nützliche Links</h3>

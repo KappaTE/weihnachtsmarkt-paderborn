@@ -12,7 +12,7 @@ export default function EssenTrinken({ teil = 'essen' }) {
     return (
       <>
         <p className="text-[13.5px] leading-[1.45] text-nebel-400">
-          Sechseinhalb Stunden draußen Ende November sind lang. Zwei verlässlich warme Orte:
+          Sechseinhalb Stunden draußen Ende November sind lang. Drei verlässlich warme Orte:
         </p>
         <div className="flex flex-col gap-2">
           {aufwaermen.map(a => (

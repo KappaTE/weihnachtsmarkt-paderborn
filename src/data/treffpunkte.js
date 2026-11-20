@@ -7,7 +7,8 @@ export const treffpunkte = [
   { id: 'hotel',         ortId: 'hotel',         label: 'Vor dem Hotel',     sub: 'Hotel zur Mühle, Mühlenstraße 2' },
   { id: 'brauhaus',      ortId: 'brauhaus',      label: 'Vor dem Brauhaus',  sub: 'Kisau 2 · 80 m vom Hotel' },
   { id: 'domplatz',      ortId: 'domplatz',      label: 'Domplatz',          sub: 'Am Hohen Dom' },
-  { id: 'liborigalerie', ortId: 'liborigalerie', label: 'Libori-Galerie',    sub: 'Drinnen, warm, mit Toiletten' },
+  { id: 'winterplaza',   ortId: 'kamp',          label: 'Im Winter-Plaza-Zelt', sub: 'Vor der Marktkirche — überdacht, 600 Plätze' },
+  { id: 'liborigalerie', ortId: 'liborigalerie', label: 'Libori-Galerie',    sub: 'Drinnen und warm' },
 ];
 
 export const getTreffpunkt = (id) => treffpunkte.find((t) => t.id === id);

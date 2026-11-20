@@ -72,13 +72,13 @@ export const orte = [
     name: "Domplatz",
     adresse: "Domplatz, 33098 Paderborn",
     kategorie: "markt",
-    beschreibung: "Zusammen mit dem Marktplatz das Herzstück des Weihnachtsmarkts, direkt am Hohen Dom.",
+    beschreibung: "Zusammen mit dem Marktplatz das Herzstück des Weihnachtsmarkts, direkt am Hohen Dom. Auf dem Marktplatz dreht sich die rund 20 Meter hohe Weihnachtspyramide.",
     tipp: "Die stimmungsvollste Ecke, sobald es dunkel wird — also genau richtig für nach dem Abendessen.",
     oeffnung: "Sa 11:00–22:00",
     lat: 51.71869,
     lng: 8.75694,
     mapsLink: maps("Domplatz Paderborn"),
-    stand: "unbestaetigt",
+    stand: "bestaetigt",
   },
 
   {
@@ -92,7 +92,7 @@ export const orte = [
     lat: 51.71721,
     lng: 8.75348,
     mapsLink: maps("Rathausplatz Paderborn"),
-    stand: "unbestaetigt",
+    stand: "bestaetigt",
   },
 
   {
@@ -100,13 +100,13 @@ export const orte = [
     name: "Marienplatz",
     adresse: "Marienplatz, 33098 Paderborn",
     kategorie: "markt",
-    beschreibung: "Teil der Fußgängerzone, gehört zum Marktgebiet.",
-    tipp: "Liegt auf dem Weg zwischen Hotel und Rathausplatz.",
+    beschreibung: "Teil der Fußgängerzone. Hier stehen das historische Riesenrad und das über hundert Jahre alte Pferdekarussell.",
+    tipp: "Vom Riesenrad aus sieht man auf das Rathaus — in diesem Jahr wieder der größte Adventskalender der Region.",
     oeffnung: "Sa 11:00–22:00",
     lat: 51.71727,
     lng: 8.75240,
     mapsLink: maps("Marienplatz Paderborn"),
-    stand: "unbestaetigt",
+    stand: "bestaetigt",
   },
 
   {
@@ -120,7 +120,7 @@ export const orte = [
     lat: 51.71604,
     lng: 8.74816,
     mapsLink: maps("Westernstraße Paderborn"),
-    stand: "unbestaetigt",
+    stand: "bestaetigt",
   },
 
   {
@@ -134,21 +134,36 @@ export const orte = [
     lat: 51.71709,
     lng: 8.75462,
     mapsLink: maps("Neuer Platz Paderborn"),
-    stand: "unbestaetigt",
+    stand: "bestaetigt",
   },
 
   {
     id: "kamp",
-    name: "Kamp / Marktkirche",
-    adresse: "Kamp, 33098 Paderborn",
+    name: "Winter-Plaza",
+    adresse: "Vor der Marktkirche, Kamp, 33098 Paderborn",
     kategorie: "markt",
-    beschreibung: "In Teilbereichen ebenfalls Markt, an der Marktkirche.",
-    tipp: "Hier liegt auch die Libori-Galerie — überdacht und warm, wenn es zu ungemütlich wird.",
+    beschreibung: "Neu in diesem Jahr: Gastronomie-Stände rund um ein großes Zelt mit transparentem Dach — rund 600 trockene Sitz- und Stehplätze.",
+    tipp: "Die beste Chance, dass 16 Leute mal zusammen stehen oder sitzen — und warm und trocken ist es auch. Daneben: die Eisbahn auf dem Jühenplatz.",
     oeffnung: "Sa 11:00–22:00",
     lat: 51.71610,
     lng: 8.75380,
     mapsLink: maps("Marktkirche Kamp Paderborn"),
-    stand: "unbestaetigt",
+    naviLink: navi("Marktkirche Kamp Paderborn"),
+    stand: "bestaetigt",
+  },
+
+  {
+    id: "eisbahn",
+    name: "Eisbahn",
+    adresse: "Jühenplatz, 33098 Paderborn",
+    kategorie: "markt",
+    beschreibung: "Kleine Eisbahn (6 × 12 Meter) direkt neben der Winter-Plaza.",
+    tipp: "Zeiten und Preise hat die Stadt noch nicht genannt.",
+    oeffnung: "Sa 11:00–22:00",
+    lat: 51.71647,
+    lng: 8.75358,
+    mapsLink: maps("Jühenplatz Paderborn"),
+    stand: "bestaetigt",
   },
 
   {
@@ -157,7 +172,7 @@ export const orte = [
     adresse: "Kamp 30–32, 33098 Paderborn",
     kategorie: "markt",
     beschreibung: "Überdachtes Einkaufszentrum mitten im Marktgebiet.",
-    tipp: "Der beste Aufwärm-Stopp, wenn das Hotel gerade zu weit weg ist — und es gibt Toiletten.",
+    tipp: "Überdacht und warm, wenn das Hotel gerade zu weit weg ist. Größere Toilettenanlage, kostenpflichtig.",
     lat: 51.71647,
     lng: 8.75790,
     mapsLink: maps("Libori Galerie Paderborn"),
